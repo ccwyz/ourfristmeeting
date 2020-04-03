@@ -1,8 +1,12 @@
 package com.ccwyz.ourfirstmeeting.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ccwyz.ourfirstmeeting.dto.request.common.PageResDTO;
 import com.ccwyz.ourfirstmeeting.dto.request.user.UserInfoCreateDTO;
+import com.ccwyz.ourfirstmeeting.dto.request.user.UserInfoPageDTO;
 import com.ccwyz.ourfirstmeeting.dto.response.RetResult;
+import com.ccwyz.ourfirstmeeting.dto.response.UserInfoListDTO;
 import com.ccwyz.ourfirstmeeting.service.UserInfoService;
 import com.ccwyz.ourfirstmeeting.utils.RetResultUtil;
 import io.swagger.annotations.Api;
@@ -38,5 +42,11 @@ public class UserInfoController {
     public RetResult create(@RequestBody  @Valid UserInfoCreateDTO userInfoCreateDTO){
         userInfoService.create(userInfoCreateDTO);
         return RetResultUtil.success();
+    }
+
+    @ApiOperation(value = "新增用户")
+    @RequestMapping(value = {"/list"},method = RequestMethod.POST)
+    public RetResult<PageResDTO<UserInfoListDTO>> list(@RequestBody  @Valid UserInfoPageDTO userInfoPageDTO){
+        return RetResultUtil.success(userInfoService.list(userInfoPageDTO));
     }
 }

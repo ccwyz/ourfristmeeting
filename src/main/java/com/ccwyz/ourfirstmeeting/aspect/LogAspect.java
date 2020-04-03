@@ -2,6 +2,8 @@ package com.ccwyz.ourfirstmeeting.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.ccwyz.ourfirstmeeting.constant.LogConst;
+import com.ccwyz.ourfirstmeeting.dto.response.RetResult;
+import com.ccwyz.ourfirstmeeting.utils.RetResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 /**
  * @program: ourfristmeeting
@@ -27,7 +30,7 @@ public class LogAspect {
 
     @Around(LogConst.LOG_DATA_POINT)
     public Object doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
-        log.info("### <<<---------------------------------LOG Start------------------------------->>>");
+        log.info("### <<<=================================LOG Start===============================>>>");
         ServletRequestAttributes requestAttributes =(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         //打印请求的url
@@ -44,8 +47,20 @@ public class LogAspect {
 
         Object obj = proceedingJoinPoint.proceed();
         //打印出参
+//        if(obj instanceof RetResult){
+//            Object data = ((RetResult) obj).getData();
+//            if(data instanceof Collection){
+//                RetResult<Object> success = RetResultUtil.success();
+//                log.info("### Response Args       :{}", success);
+//            }else{
+//
+//            }
+//
+//        }else{
+//            log.info("### Response Args       :{}", JSON.toJSONString(obj));
+//        }
         log.info("### Response Args       :{}", JSON.toJSONString(obj));
-        log.info("### <<<---------------------------------LOG End------------------------------->>>");
+        log.info("### <<<|||||||||||||||||||||||||||||||||LOG End|||||||||||||||||||||||||||||||||>>>");
         return obj;
     }
 }

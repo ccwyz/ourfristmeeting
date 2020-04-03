@@ -14,7 +14,9 @@ public enum ResponseEnum {
     METHOD_NOT_ALLOWED("400002", "不支持当前请求方法"),
     INTERNAL_SERVER_ERROR("400003","Internal Server Error 服务异常"),
 
-    DB_INSERT_OR_UPDATE_ERROR("400004","数据库新增或修改异常")
+    DB_INSERT_OR_UPDATE_ERROR("400004","数据库新增或修改异常"),
+
+    NEW_INSTANCE_BY_CLASS_ERROR("400005","反射新增对象失败")
 
     ;
     private String code;
