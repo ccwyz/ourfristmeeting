@@ -1,6 +1,9 @@
 package com.ccwyz.ourfirstmeeting.service;
 
+import com.ccwyz.ourfirstmeeting.dto.request.common.PageResDTO;
 import com.ccwyz.ourfirstmeeting.dto.request.user.UserInfoCreateDTO;
+import com.ccwyz.ourfirstmeeting.dto.request.user.UserInfoPageDTO;
+import com.ccwyz.ourfirstmeeting.dto.response.UserInfoListDTO;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.ccwyz.ourfirstmeeting.dto.request.user.UserInfoCreateDTO;
 public interface UserInfoService  {
 
     void create(UserInfoCreateDTO userInfoCreateDTO);
+
+    PageResDTO<UserInfoListDTO> list(UserInfoPageDTO userInfoPageDTO);
 }
